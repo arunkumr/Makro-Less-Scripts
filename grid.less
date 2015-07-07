@@ -1,0 +1,48 @@
+@sm:768px;@md:992px; @lg:1200px;
+
+.grid {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+.row
+{
+    letter-spacing: -.31em;
+    text-rendering: optimizespeed;
+    font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+    -webkit-flex-flow: row wrap;
+    display: -ms-flexbox;
+    -ms-flex-flow: row wrap;
+    -ms-align-content: flex-start;
+    -webkit-align-content: flex-start;
+    align-content: flex-start;
+}
+
+.grid-cal( @grid-len, @total-len)
+{
+  @width:unit(((@grid-len/@total-len)*100), ~"%");
+}
+
+.make-grid(@grid-len, @total-len) {
+     &:extend(.grid);
+    .grid-cal(@grid-len, @total-len);
+     width:@width;
+    *width:@width;
+}
+.make-grid(@sw, @grid-len, @total-len) {
+	.make-grid(1,1);    
+    @media (min-width: @sw) {
+        .grid-cal(@grid-len, @total-len);
+     width:@width;
+    *width:@width;
+    }
+}
+
+.make-row()
+{  
+    &:extend(.row);
+}
